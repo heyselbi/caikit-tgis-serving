@@ -5,14 +5,15 @@ metadata:
     serving.knative.openshift.io/enablePassthrough: "true"
     sidecar.istio.io/inject: "true"
     sidecar.istio.io/rewriteAppHTTPProbers: "true"
-  name: caikit-example-isvc
+  name: caikit-tgis-example-isvc
 spec:
   predictor:
     model:
       apiVersion: serving.kserve.io/v1alpha2
       modelFormat:
         name: caikit
-      runtime: caikit-runtime
+      runtime: caikit-tgis-runtime
       storageUri: proto://path/to/model # single model here
       # Example, using a pvc:
       # storageUri: pvc://caikit-pvc/flan-t5-small-caikit/
+      # Target directory must contain a config.yml
