@@ -1,0 +1,21 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    serving.knative.openshift.io/enablePassthrough: "true"
+    sidecar.istio.io/inject: "true"
+    sidecar.istio.io/rewriteAppHTTPProbers: "true"
+  name: ovms-example-isvc
+spec:
+  predictor:
+    serviceAccountName: sa
+    model:
+      modelFormat:
+        name: onnx
+      runtime: kserve-ovms
+      storageUri: s3://modelmesh-example-models/onnx/
+  resources:
+    requests:
+      nvidia.com/gpu: 1
+    limits:
+      nvidia.com/gpu: 1
